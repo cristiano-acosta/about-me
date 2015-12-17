@@ -1,0 +1,11 @@
+{
+  "directory": "js/vendor/",
+  "analytics": true,
+  "timeout": 120000,
+  "registry": {
+  "search": [
+    "http://localhost:80",
+    "https://bower.herokuapp.com"
+    ]
+  }
+}

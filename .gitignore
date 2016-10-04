@@ -1,6 +1,5 @@
-assets/*
-!assets/.gitignore
-protected/runtime/*
-!protected/runtime/.gitignore
-protected/data/*.db
-themes/classic/views/
+node_modules
+#dist
+.tmp
+bower_components
+test/bower_components

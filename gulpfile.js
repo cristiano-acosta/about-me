@@ -165,6 +165,13 @@ gulp.task('wiredep', () => {
     .pipe(gulp.dest('app'));
 });
 
+// Create a deploy task
+gulp.task('deploy', ['build'], () => {
+  return gulp.src('dist')
+    .pipe($.subtree())
+    .pipe($.clean());
+});
+
 gulp.task('build', ['lint', 'html', 'img', 'fonts', 'extras'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });

@@ -5,7 +5,7 @@ $(function () {
 
   $.getJSON('behance_secret.json', function (json) {
     var beUsername = 'cristianoacosta',
-      beApiKey = 'AoPlpF7ipi8sIeXmb0Ikks7ttXUmjSIS',
+      beApiKey = 'r9whGoGLGNqrkeCVY69NI3w6lj8qwjOb',
       bePerPage = 12,
       endpointUser = 'http://www.behance.net/v2/users/' + beUsername + '?callback=?&api_key=' + beApiKey,
       endpointProjects = 'http://www.behance.net/v2/users/' + beUsername + '/projects?callback=?&api_key=' + beApiKey + '&per_page=' + bePerPage;

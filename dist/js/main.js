@@ -1,1 +1,72 @@
-"use strict";$(function(){function e(){var e=JSON.parse(sessionStorage.getItem("behanceUser")),t=$("#profile-template").html(),a=Handlebars.compile(t),s=a(e);$("#header").html(s),$("#header .loading").remove()}function t(){var e=JSON.parse(sessionStorage.getItem("behanceProject")),t=$("#portfolio-template").html(),a=Handlebars.compile(t),s=a(e);$("#portfolio").html(s),$(".wrapper").removeClass("loading")}function a(a,s){sessionStorage.getItem("behanceProject")?t():$.getJSON(a,function(e){sessionStorage.setItem("behanceProject",JSON.stringify(e)),t()}),sessionStorage.getItem("behanceUser")?e():$.getJSON(s,function(t){sessionStorage.setItem("behanceUser",JSON.stringify(t)),e()})}$.getJSON("behance_secret.json",function(e){var t="cristianoacosta",s="r9whGoGLGNqrkeCVY69NI3w6lj8qwjOb",o=12,n="http://www.behance.net/v2/users/"+t+"?callback=?&api_key="+s,r="http://www.behance.net/v2/users/"+t+"/projects?callback=?&api_key="+s+"&per_page="+o;a(r,n)})});
+'use strict';
+
+$(function () {
+
+  // Get your Behance API Key here:
+  // https://www.behance.net/dev;
+
+  $.getJSON('behance_secret.json', function (json) {
+    var beUsername = 'cristianoacosta',
+        beApiKey = 'r9whGoGLGNqrkeCVY69NI3w6lj8qwjOb',
+        bePerPage = 12,
+        endpointUser = 'http://www.behance.net/v2/users/' + beUsername + '?callback=?&api_key=' + beApiKey,
+        endpointProjects = 'http://www.behance.net/v2/users/' + beUsername + '/projects?callback=?&api_key=' + beApiKey + '&per_page=' + bePerPage;
+    getBehanceData(endpointProjects, endpointUser);
+  });
+
+  /**
+   * Render User data
+   */
+  function setUserTemplate() {
+    // Get handlebars template
+    // And compile it (populate data)
+    var userData = JSON.parse(sessionStorage.getItem('behanceUser')),
+        getTemplate = $('#profile-template').html(),
+        template = Handlebars.compile(getTemplate),
+        result = template(userData);
+    $('#header').html(result);
+    $('#header .loading').remove();
+  }
+
+  /**
+   * Render Portfolio data
+   */
+  function setPortfolioTemplate() {
+    // Get handlebars template
+    // And compile it (populate data)
+    var projectData = JSON.parse(sessionStorage.getItem('behanceProject')),
+        getTemplate = $('#portfolio-template').html(),
+        template = Handlebars.compile(getTemplate),
+        result = template(projectData);
+    $('#portfolio').html(result);
+    $('.wrapper').removeClass('loading');
+  }
+
+  /**
+   * Get data
+   */
+  function getBehanceData(endpointProjects, endpointUser) {
+    if (sessionStorage.getItem('behanceProject')) {
+      setPortfolioTemplate();
+    } else {
+      // Load JSON-encoded data from the Behance API using a GET HTTP request.
+      // Store it in sessionStorage
+      $.getJSON(endpointProjects, function (project) {
+        sessionStorage.setItem('behanceProject', JSON.stringify(project));
+        setPortfolioTemplate();
+      });
+    }
+
+    if (sessionStorage.getItem('behanceUser')) {
+      setUserTemplate();
+    } else {
+      // Load JSON-encoded data from the Behance API using a GET HTTP request.
+      // Store it in sessionStorage
+      $.getJSON(endpointUser, function (user) {
+        sessionStorage.setItem('behanceUser', JSON.stringify(user));
+        setUserTemplate();
+      });
+    }
+  }
+});
+//# sourceMappingURL=main.js.map

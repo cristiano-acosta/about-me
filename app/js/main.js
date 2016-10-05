@@ -7,8 +7,8 @@ $(function () {
     var beUsername = 'cristianoacosta',
       beApiKey = 'AoPlpF7ipi8sIeXmb0Ikks7ttXUmjSIS',
       bePerPage = 12,
-      endpointUser = '//www.behance.net/v2/users/' + beUsername + '?callback=?&api_key=' + beApiKey,
-      endpointProjects = '//www.behance.net/v2/users/' + beUsername + '/projects?callback=?&api_key=' + beApiKey + '&per_page=' + bePerPage;
+      endpointUser = 'http://www.behance.net/v2/users/' + beUsername + '?callback=?&api_key=' + beApiKey,
+      endpointProjects = 'http://www.behance.net/v2/users/' + beUsername + '/projects?callback=?&api_key=' + beApiKey + '&per_page=' + bePerPage;
     getBehanceData(endpointProjects, endpointUser);
   });
 

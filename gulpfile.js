@@ -168,8 +168,10 @@ gulp.task('wiredep', () => {
 // Create a deploy task
 gulp.task('deploy', ['build'], () => {
   return gulp.src('dist')
-    .pipe($.subtree())
-    .pipe($.clean());
+    .pipe($.subtree({
+      remote: 'upstream', branch: 'gh-pages', message: 'Here We Go!'
+    }))
+    /*.pipe($.clean())*/;
 });
 
 gulp.task('build', ['lint', 'html', 'img', 'fonts', 'extras'], () => {

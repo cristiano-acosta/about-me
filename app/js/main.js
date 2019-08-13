@@ -23,7 +23,7 @@ $(function () {
     var template = Handlebars.compile(getTemplate);
     var result = template(userData);
     $('#header').html(result);
-    $('#header .loading').remove();
+    $('#header .loading-img').remove();
   }
 
   /**

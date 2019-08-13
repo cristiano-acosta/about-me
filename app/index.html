@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
     <!-- build:css styles/vendor.css -->
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+    <!--<link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" type="text/css" />-->
     <!-- endbuild -->
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="css/main.css">
@@ -22,49 +22,57 @@
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <header id="header" class="portfolio-header">
-      <img class="loading-img" src="img/loading-spinning-bubbles.svg" width="64" height="64">
       <script id="profile-template" type="text/x-handlebars-template">
-        <h1 class="profile-name"><img class="profile-avatar" src="{{user.images.[138]}}" alt="{{user.display_name}}"></h1>
-        <p class="profile-occupation lead">{{user.occupation}}</p>
-        <div class="profile-fields">
-          <ul class="field-list">
-            {{#each user.fields}}
-            <li class="field-item">{{this}}</li>
-            {{/each}}
-          </ul>
+        <div class="container">
+          <img class="loading-img" src="img/loading-spinning-bubbles.svg" width="64" height="64" />
+          <div class="row">
+            <div class="col">
+              <h1 class="profile-name">
+                <img class="profile-avatar" src="{{user.images.[138]}}" alt="{{user.display_name}}">
+              </h1>
+              <p class="profile-occupation lead">{{user.occupation}}</p>
+            </div>
+            <ul class="field-list">
+              {{#each user.fields}}
+              <li class="field-item">{{this}}</li>
+              {{/each}}
+            </ul>
+            <address class="profile-location ">
+              {{user.city}}, {{user.country}},
+            </address>
+          </div>
         </div>
-        <div class="profile-location fi-marker">{{user.city}}, {{user.country}}</div>
       </script>
     </header>
-
     <section id="portfolio" class="portfolio-area">
       <script id="portfolio-template" type="text/x-handlebars-template">
-        <ul class="portfolio-list">
-          {{#each projects}}
-          <li class="portfolio-item">
-            <div class="portfolio-content">
-              <figure class="portfolio-cover" title="{{this.name}}">
-                {{#if this.covers.[404]}}
-                <img class="portfolio-image" src="{{this.covers.[404]}}" width="293" height="229" alt="">{{else}} {{#if this.covers.[230]}}
-                <img class="portfolio-image" src="{{this.covers.[230]}}" alt="">{{else}}
-                <img class="portfolio-image" src="{{this.covers.[202]}}" alt="">{{/if}} {{/if}}
-              </figure>
-              <div class="portfolio-infos">
-                <h2 class="portfolio-title">{{this.name}}</h2>
-                <div class="portfolio-date">{{dateFormat this.published_on}}</div>
-                <div class="portfolio-fields">
-                  <ul class="field-list">
+        <div class="container">
+          <div class="row">
+            {{#each projects}}
+            <article class="col-4 " >
+              <div class="card">
+                <figure class="card-img-top" title="{{this.name}}">
+                  {{#if this.covers.[404]}}<img class="img-fluid" src="{{this.covers.[404]}}" width="293" height="229" alt="">{{else}}
+                  {{#if this.covers.[230]}}<img class="img-fluid" src="{{this.covers.[230]}}" alt="">{{else}}
+                  <img class="img-fluid" src="{{this.covers.[202]}}" alt="">{{/if}} {{/if}}
+                </figure>
+                <div class="card-body">
+                  <h4 class="card-title">{{this.name}}</h4>
+                  <p class="card-text">{{dateFormat this.published_on}}</p>
+                  <ul class="nav nav-pills nav-stacked">
                     {{#each this.fields}}
-                    <li class="field-item">{{this}}</li>
+                    <li class="nav-item">
+                      <span class="nav-link">{{this}}</span>
+                    </li>
                     {{/each}}
                   </ul>
-                  <a href="{{this.url}}" class="wpbe-btn" target="_blank">View details</a>
+                  <a href="{{this.url}}" class="btn btn-primary">View details</a>
                 </div>
               </div>
-            </div>
-          </li>
-          {{/each}}
-        </ul>
+            </article>
+            {{/each}}
+          </div>
+        </div>
       </script>
     </section>
 

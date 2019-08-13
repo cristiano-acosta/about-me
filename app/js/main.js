@@ -1,15 +1,24 @@
+console.log('\'Allo \'Allo!');
+
+// Uncomment to enable Bootstrap tooltips
+// https://getbootstrap.com/docs/4.0/components/tooltips/#example-enable-tooltips-everywhere
+// $(function () { $('[data-toggle="tooltip"]').tooltip(); });
+
+// Uncomment to enable Bootstrap popovers
+// https://getbootstrap.com/docs/4.0/components/popovers/#example-enable-popovers-everywhere
+// $(function () { $('[data-toggle="popover"]').popover(); });
 $(function () {
 
   // Get your Behance API Key here:
   // https://www.behance.net/dev;
 
   //$.getJSON('behance_secret.json', function (json) {
-    var beUsername = 'cristianoacosta',
-      beApiKey = 'r9whGoGLGNqrkeCVY69NI3w6lj8qwjOb',
-      bePerPage = 12,
-      endpointUser = 'http://www.behance.net/v2/users/' + beUsername + '?callback=?&api_key=' + beApiKey,
-      endpointProjects = 'http://www.behance.net/v2/users/' + beUsername + '/projects?callback=?&api_key=' + beApiKey + '&per_page=' + bePerPage;
-    getBehanceData(endpointProjects, endpointUser);
+  var beUsername = 'cristianoacosta',
+    beApiKey = 'r9whGoGLGNqrkeCVY69NI3w6lj8qwjOb',
+    bePerPage = 12,
+    endpointUser = 'http://www.behance.net/v2/users/' + beUsername + '?callback=?&api_key=' + beApiKey,
+    endpointProjects = 'http://www.behance.net/v2/users/' + beUsername + '/projects?callback=?&api_key=' + beApiKey + '&per_page=' + bePerPage;
+  getBehanceData(endpointProjects, endpointUser);
   //});
 
   /**
@@ -18,10 +27,10 @@ $(function () {
   function setUserTemplate() {
     // Get handlebars template
     // And compile it (populate data)
-    var userData = JSON.parse(sessionStorage.getItem('behanceUser')),
-      getTemplate = $('#profile-template').html(),
-      template = Handlebars.compile(getTemplate),
-      result = template(userData);
+    var userData = JSON.parse(sessionStorage.getItem('behanceUser'));
+    var getTemplate = $('#profile-template').html();
+    var template = Handlebars.compile(getTemplate);
+    var result = template(userData);
     $('#header').html(result);
     $('#header .loading').remove();
   }
@@ -32,10 +41,10 @@ $(function () {
   function setPortfolioTemplate() {
     // Get handlebars template
     // And compile it (populate data)
-    var projectData = JSON.parse(sessionStorage.getItem('behanceProject')),
-      getTemplate = $('#portfolio-template').html(),
-      template = Handlebars.compile(getTemplate),
-      result = template(projectData);
+    var projectData = JSON.parse(sessionStorage.getItem('behanceProject'));
+    var getTemplate = $('#portfolio-template').html();
+    var template = Handlebars.compile(getTemplate);
+    var result = template(projectData);
     $('#portfolio').html(result);
     $('.wrapper').removeClass('loading');
   }

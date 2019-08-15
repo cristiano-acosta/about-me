@@ -20,7 +20,7 @@ const isTest = process.env.NODE_ENV === 'test';
 const isDev = !isProd && !isTest;
 
 function styles() {
-  return src('app/css/*.scss')
+  return src('app/scss/*.scss')
     .pipe($.plumber())
     .pipe($.if(!isProd, $.sourcemaps.init()))
     .pipe($.sass.sync({
@@ -112,7 +112,7 @@ function html() {
 function images() {
   return src('app/img/**/*', { since: lastRun(images) })
     .pipe($.imagemin())
-    .pipe(dest('dist/images'));
+    .pipe(dest('dist/img'));
 };
 
 function fonts() {
@@ -168,7 +168,7 @@ function startAppServer() {
     '.tmp/fonts/**/*'
   ]).on('change', server.reload);
 
-  watch('app/css/**/*.scss', styles);
+  watch('app/scss/**/*.scss', styles);
   watch('app/js/**/*.js', scripts);
   watch('modernizr.json', modernizr);
   watch('app/fonts/**/*', fonts);

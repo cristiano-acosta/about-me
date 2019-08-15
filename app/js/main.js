@@ -4,17 +4,15 @@ $(function () {
   // https://www.behance.net/dev;
 
   //$.getJSON('behance_secret.json', function (json) {
-  var beUsername = 'cristianoacosta',
-    beApiKey = 'r9whGoGLGNqrkeCVY69NI3w6lj8qwjOb',
-    bePerPage = 12,
-    endpointUser = 'http://www.behance.net/v2/users/' + beUsername + '?callback=?&api_key=' + beApiKey,
-    endpointProjects = 'http://www.behance.net/v2/users/' + beUsername + '/projects?callback=?&api_key=' + beApiKey + '&per_page=' + bePerPage;
+  var beUsername = 'cristianoacosta';
+  var beApiKey = 'r9whGoGLGNqrkeCVY69NI3w6lj8qwjOb';
+  var bePerPage = 12;
+  var endpointUser = 'http://www.behance.net/v2/users/' + beUsername + '?callback=?&api_key=' + beApiKey;
+  var endpointProjects = 'http://www.behance.net/v2/users/' + beUsername + '/projects?callback=?&api_key=' + beApiKey + '&per_page=' + bePerPage;
   getBehanceData(endpointProjects, endpointUser);
   //});
 
-  /**
-   * Render User data
-   */
+  /** * Render User data */
   function setUserTemplate() {
     // Get handlebars template
     // And compile it (populate data)
@@ -22,13 +20,11 @@ $(function () {
     var getTemplate = $('#profile-template').html();
     var template = Handlebars.compile(getTemplate);
     var result = template(userData);
-    $('#header').html(result);
-    $('#header .loading-img').remove();
+    $('#about').html(result);
+    $('#about .loading-img').remove();
   }
 
-  /**
-   * Render Portfolio data
-   */
+  /** * Render Portfolio data */
   function setPortfolioTemplate() {
     // Get handlebars template
     // And compile it (populate data)
@@ -40,9 +36,7 @@ $(function () {
     $('.wrapper').removeClass('loading');
   }
 
-  /**
-   * Get data
-   */
+  /*** Get data */
   function getBehanceData(endpointProjects, endpointUser) {
     if (sessionStorage.getItem('behanceProject')) {
       setPortfolioTemplate();
@@ -66,5 +60,14 @@ $(function () {
       });
     }
   }
+
+  /** * Linkedin Profile Data */
+  var linkedinUserName = 'cristianoacosta';
+  var linkedinProfilePage = 'https://www.linkedin.com/in/'+linkedinUserName;
+  console.log(linkedinProfilePage);
+  $.getJSON(linkedinProfilePage, function (profile) {
+    sessionStorage.setItem('linkedinProfilePage', JSON.stringify(profile));
+    console.log(profile);
+  });
 
 });
